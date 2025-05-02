@@ -1,0 +1,28 @@
+{
+  "name": "bookmarq",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.2.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "@supabase/supabase-js": "^2.38.1",
+    "@hashgraph/sdk": "^2.32.0",
+    "openai": "^4.36.0",
+    "twitter-api-v2": "^1.18.0",
+    "jsonwebtoken": "^9.0.0",
+    "bcryptjs": "^2.4.3",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.1",
+    "@types/node": "^20.8.10",
+    "@types/react": "^18.2.15"
+  }
+}

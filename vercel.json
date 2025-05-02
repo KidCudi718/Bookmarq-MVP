@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "api/cron/fetch-bookmarks.ts": {
+      "runtime": "nodejs20.x",
+      "memory": 512,
+      "maxDuration": 60,
+      "schedule": "0 * * * *"  // every hour
+    }
+  }
+}
