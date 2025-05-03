@@ -1,5 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { TwitterApi } from 'twitter-api-v2';
+import { supabase } from '@/lib/supabase';
+
+const handleTwitterLogin = async () => {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'twitter',
+  });
+  if (error) console.error('Twitter login error:', error.message);
+};
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const client = new TwitterApi({

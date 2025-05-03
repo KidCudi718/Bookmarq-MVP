@@ -1,27 +1,39 @@
-import { useEffect, useState } from 'react';
+// /src/pages/index.tsx
+
 import { supabase } from '@/lib/supabase';
 
-export default function Dashboard() {
-  const [bookmarks, setBookmarks] = useState<any[]>([]);
+const handleTwitterLogin = async () => {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'twitter',
+    options: {
+      redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/callback`,
+    },
+  });
+  if (error) console.error('Twitter login error:', error.message);
+};
 
-  useEffect(() => {
-    supabase.from('bookmarks').select('*').then(({ data }) => setBookmarks(data ?? []));
-  }, []);
-
+export default function HomePage() {
   return (
-    <main className="max-w-4xl mx-auto py-12">
-      <h1 className="text-3xl font-bold mb-6">Bookmarq Dashboard</h1>
-      {!bookmarks.length && <p>No bookmarks yet.</p>}
-      <ul className="space-y-4">
-        {bookmarks.map((bm) => (
-          <li key={bm.id} className="border p-4 rounded">
-            <a href={`https://x.com/i/bookmarks/${bm.tweet_id}`} target="_blank" rel="noreferrer" className="font-medium hover:underline">
-              {bm.tweet_text?.slice(0, 120) ?? bm.tweet_id}
-            </a>
-            <pre className="text-xs mt-2">{JSON.stringify(bm.classification, null, 2)}</pre>
-          </li>
-        ))}
-      </ul>
-    </main>
+    <div style={{ padding: '2rem', textAlign: 'center' }}>
+      <h1>Welcome to Bookmarq</h1>
+      <p>Sign in to access your bookmarks and Twitter data.</p>
+      <button
+        onClick={handleTwitterLogin}
+        style={{
+          padding: '0.5rem 1rem',
+          fontSize: '1rem',
+          cursor: 'pointer',
+          backgroundColor: '#1DA1F2',
+          color: 'white',
+          border: 'none',
+          borderRadius: '4px',
+        }}
+      >
+        Sign in with Twitter
+      </button>
+      <div style={{ marginTop: '1rem' }}>
+        <a href="/twitter">Go to Twitter Dashboard</a>
+      </div>
+    </div>
   );
 }
